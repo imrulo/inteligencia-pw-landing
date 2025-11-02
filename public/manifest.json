@@ -1,0 +1,17 @@
+{
+  "name": "Inteligencia.pw - Premium Domain for Sale",
+  "short_name": "Inteligencia.pw",
+  "description": "Premium intelligence domain available for acquisition",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1e293b",
+  "theme_color": "#d4af37",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "any",
+      "type": "image/x-icon"
+    }
+  ]
+}
+
