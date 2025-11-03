@@ -27,17 +27,19 @@ export default function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <motion.h1
-            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-tight"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.8 }}
+          <h1
+            className="
+    text-[clamp(1.8rem,6vw,4.5rem)]
+    sm:text-[clamp(2rem,5vw,5rem)]
+    font-bold text-center leading-snug
+    mx-auto px-4 sm:px-6 md:px-8
+    max-w-[90%] sm:max-w-[80%]
+    whitespace-nowrap overflow-x-auto
+    tracking-tight
+  "
           >
-            Acquire{" "}
-            <span className="text-luxury-gold bg-gradient-to-r from-luxury-gold to-yellow-400 bg-clip-text text-transparent">
-              {domainName}
-            </span>
-          </motion.h1>
+            <span className="inline-block select-none">{domainName}</span>
+          </h1>
 
           <motion.p
             className="text-xl sm:text-2xl md:text-3xl text-gray-200 mb-4 max-w-3xl mx-auto"
