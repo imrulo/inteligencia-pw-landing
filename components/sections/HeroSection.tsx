@@ -2,10 +2,28 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 
 const domainName = process.env.NEXT_PUBLIC_DOMAIN_NAME || "Inteligencia.pw";
 
 export default function HeroSection() {
+  const actionPhrase = "Acquire";
+  const [applySmartFix, setApplySmartFix] = useState(false);
+  const combinedMeasureRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    function evaluate() {
+      const el = combinedMeasureRef.current;
+      if (!el) return;
+      const hasOverflow = el.scrollWidth > el.clientWidth;
+      const isTinyViewport = typeof window !== "undefined" && window.innerWidth < 380;
+      const isVeryLongDomain = domainName.length > 18;
+      setApplySmartFix(hasOverflow || isTinyViewport || isVeryLongDomain);
+    }
+    evaluate();
+    window.addEventListener("resize", evaluate);
+    return () => window.removeEventListener("resize", evaluate);
+  }, []);
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-luxury-navy via-luxury-navy to-slate-900">
       {/* Background Image with Overlay */}
@@ -27,8 +45,39 @@ export default function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h1
-            className="
+          {applySmartFix ? (
+            <div className="text-center px-4 sm:px-6 md:px-8">
+              <h2
+                className="
+      text-base sm:text-lg md:text-xl
+      font-medium text-gray-400
+      mb-2
+      tracking-wide
+    "
+              >
+                {actionPhrase}
+              </h2>
+              <h1
+                className="
+      text-[clamp(1.8rem,6vw,4.5rem)]
+      sm:text-[clamp(2rem,5vw,5rem)]
+      font-bold leading-snug
+      text-center mx-auto
+      text-[#f5f5f5]
+      max-w-[90%] sm:max-w-[80%]
+      whitespace-nowrap
+      overflow-hidden
+      text-ellipsis
+      tracking-tight
+      select-none
+    "
+              >
+                {domainName}
+              </h1>
+            </div>
+          ) : (
+            <h1
+              className="
     text-[clamp(2.2rem,7vw,6rem)]
     sm:text-[clamp(2.6rem,6vw,7rem)]
     font-bold text-center leading-snug text-white
@@ -37,10 +86,22 @@ export default function HeroSection() {
     whitespace-nowrap overflow-x-auto
     tracking-tight
   "
+            >
+              {actionPhrase}{" "}
+              <span className="inline-block select-none text-luxury-gold bg-gradient-to-r from-luxury-gold to-yellow-400 bg-clip-text text-transparent">{domainName}</span>
+            </h1>
+          )}
+
+          {/* offscreen measurement for auto-detection */}
+          <div
+            ref={combinedMeasureRef}
+            aria-hidden
+            className="fixed left-0 -top-[9999px] opacity-0 pointer-events-none w-[90vw]"
           >
-            Acquire{" "}
-            <span className="inline-block select-none text-luxury-gold bg-gradient-to-r from-luxury-gold to-yellow-400 bg-clip-text text-transparent">{domainName}</span>
-          </h1>
+            <span className="whitespace-nowrap text-[clamp(2.2rem,7vw,6rem)] sm:text-[clamp(2.6rem,6vw,7rem)] font-bold">
+              {actionPhrase} {domainName}
+            </span>
+          </div>
 
           <motion.p
             className="text-xl sm:text-2xl md:text-3xl text-gray-200 mb-4 max-w-3xl mx-auto"
