@@ -29,16 +29,17 @@ export default function HeroSection() {
         >
           <h1
             className="
-    text-[clamp(1.8rem,6vw,4.5rem)]
-    sm:text-[clamp(2rem,5vw,5rem)]
-    font-bold text-center leading-snug
+    text-[clamp(2.2rem,7vw,6rem)]
+    sm:text-[clamp(2.6rem,6vw,7rem)]
+    font-bold text-center leading-snug text-white
     mx-auto px-4 sm:px-6 md:px-8
     max-w-[90%] sm:max-w-[80%]
     whitespace-nowrap overflow-x-auto
     tracking-tight
   "
           >
-            <span className="inline-block select-none">{domainName}</span>
+            Acquire{" "}
+            <span className="inline-block select-none text-luxury-gold bg-gradient-to-r from-luxury-gold to-yellow-400 bg-clip-text text-transparent">{domainName}</span>
           </h1>
 
           <motion.p
